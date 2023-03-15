@@ -1,26 +1,30 @@
 var startButton
 var quizScreen
 
-const duration = 60;
-const countdown = document.getElementById("countdown")
+let duration = 60;
+const countdown = document.getElementById('time');
 
-// Update the countdown every second
-const timer = setInterval(() => {
-    // Calculate the remaining time in seconds
-  const timeLeft = duration - Math.floor((Date.now() - startTime) / 1000);
+setInterval(()=>{
+countdown.textContent = duration;
+duration--;
+}, 1000);
+// // Update the countdown every second
+// const timer = setInterval(() => {
+//     // Calculate the remaining time in seconds
+//   const timeLeft = duration - Math.floor((Date.now() - startTime) / 1000);
   
-    // Update the countdown element with the remaining time
-  countdown.innerHTML = `Time left: ${timeLeft} seconds`;
+//     // Update the countdown element with the remaining time
+//   countdown.innerHTML = `Time left: ${timeLeft} seconds`;
   
-    // Check if the timer has expired
-  if (timeLeft <= 0) {
-      clearInterval(timer);
-      countdown.innerHTML = "Time's up!";
-  }
-  }, 1000);
+//     // Check if the timer has expired
+//   if (timeLeft <= 0) {
+//       clearInterval(timer);
+//       countdown.innerHTML = "Time's up!";
+//   }
+//   }, 1000);
   
-  // Get the start time of the timer
-  const startTime = Date.now();
+//   // Get the start time of the timer
+//   const startTime = Date.now();
 
 // var timeEl = document.querySelector(".time");
 
