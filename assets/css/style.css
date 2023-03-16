@@ -34,7 +34,6 @@ section {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding-top: 10%;
 }
 
 section h2 {
@@ -137,16 +136,6 @@ text-align: center;
     transform: transform 100ms;
 }
 
-/* /* .choice-text:hover {
-    cursor: pointer;
-    background-color: var(--highlight);
-} 
-
-.choice-prefix:hover {
-    cursor: pointer;
-    background-color: var(--highlight);
-} */
-
 .choice-text, .choice-prefix {
     background: var(--cyan);
     color: var(--skyblue);
@@ -159,4 +148,34 @@ text-align: center;
 .choice-text {
     padding: 2rem;
     width: 100%;
+}
+
+.end-section {
+    display: flex;
+    flex-direction: column;
+    margin-left: 25%;
+}
+
+.input {
+    display: block;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 6%;
+    width: 30vw;
+}
+
+#highScoresList {
+    list-style: none;
+    margin-bottom: 4rem;
+}
+
+.high-score {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .choice-container {
+        min-width: 40rem;
+    }
 }
