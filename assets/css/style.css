@@ -14,6 +14,7 @@
 header {
     font-size: 60px;
     text-align: center;
+    margin-top: 3%;
     color: var(--highlight);
 
 }
@@ -37,9 +38,10 @@ section {
 }
 
 section h2 {
-    background-color: var(--cyan);
-    color: white;
-    padding: 5%;
+    color: var(--highlight);
+    font-size: 50px;
+    margin-top: auto;
+    padding: 1%;
 }
 
 section ol, section ol li {
@@ -52,6 +54,9 @@ section ol {
     flex-wrap: wrap;
 }
 
+.header-timer {
+    font-size: 30px;
+}
 
 .answers {
     display: block;
@@ -112,4 +117,46 @@ text-align: center;
     background: var(--highlight);
     transition: transform 150ms;
     transform: scale(1.03);
+}
+
+.choice-container {
+    display: flex;
+    margin-bottom: 0.8rem;
+    width: 100%;
+    border-radius: 4px;
+    background-color: var(--cyan);
+    color: var(--skyblue);
+    font-size: 50px;
+    min-width: 80rem;
+}
+
+.choice-container:hover {
+    cursor: pointer;
+    /* background-color: var(--highlight); */
+    transform: scale(1.02);
+    transform: transform 100ms;
+}
+
+/* /* .choice-text:hover {
+    cursor: pointer;
+    background-color: var(--highlight);
+} 
+
+.choice-prefix:hover {
+    cursor: pointer;
+    background-color: var(--highlight);
+} */
+
+.choice-text, .choice-prefix {
+    background: var(--cyan);
+    color: var(--skyblue);
+}
+
+.choice-prefix {
+    padding: 2rem;
+}
+
+.choice-text {
+    padding: 2rem;
+    width: 100%;
 }
