@@ -2,7 +2,7 @@ var startButton
 var quizScreen
 
 let duration = 60;
-const countdown = document.getElementById('time');
+var countdown = document.getElementById('time');
 
 let timer = setInterval(() => {
     countdown.textContent = duration;
@@ -15,16 +15,17 @@ let timer = setInterval(() => {
     }
   }, 1000);
 
-const question = document.querySelector('#question')
-const choices = Array.from(document.querySelectorAll('#choices'))
+var question = document.querySelector('#question')
+var choices = Array.from(document.querySelectorAll('.choice-text'));
 
-let currentQuestion = {}
-let acceptingAnswers = true
-let score = 0
-let questionCounter = 0
-let availableQuestions = []
 
-let questions = [
+var currentQuestion = {}
+var acceptingAnswers = true
+var score = 0
+var questionCounter = 0
+var availableQuestions = []
+
+var questions = [
     {
         question: "Commonly used data types DO NOT include:",
         choice1: "strings",
@@ -63,8 +64,8 @@ let questions = [
     }
 ]
 
-const MAX_QUESTIONS = 5
-
+var MAX_QUESTIONS = 5
+var SCORE_POINTS = 100
 startGame = () => {
     questionCounter = 0
     score = 0
@@ -75,38 +76,39 @@ startGame = () => {
 getNewQuestion = () => {
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score)
-        return window.location.assign('/end.html')
+        return window.location.assign('./end.html')
     }
 
     questionCounter++
     
-    const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
+    var questionsIndex = Math.floor(Math.random() * availableQuestions.length)
     currentQuestion = availableQuestions[questionsIndex]
     question.innerText = currentQuestion.question;
 
     choices.forEach(choice => {
-        const number = choice.dataset['number']
+        var number = choice.dataset['number']
         choice.innerText = currentQuestion['choice' + number]
 
     })
-
     availableQuestions.splice(questionsIndex, 1)
 
     acceptingAnswers = true
 }
 
 choices.forEach(choice => {
-choice.addEventListner('click', e => {
-    if(!acceptingAnswers) return 
+choice.addEventListener('click', e => {
+    if(!acceptingAnswers) {
+     return 
+}
     acceptingAnswers = false
-    const selectedChoice = e.target
-    const selectedAnswer = selectedChoice.dataset['number']
+    var selectedChoice = e.target
+    var selectedAnswer = selectedChoice.dataset['number'];
 
-    let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
+    let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
 
-    if(classToApply === 'correct') {
-        incrementScore(SCORE_POINT)
-    }
+    // if(classToApply === 'correct') {
+    //     incrementScore(SCORE_POINTS);
+    // }
 
     selectedChoice.parentElement.classList.add(classToApply)
 
@@ -118,9 +120,9 @@ choice.addEventListner('click', e => {
 
 })
 
-incrementScore = num => {
-    score +=num
-    scoreText.innerText = score
-}
+// incrementScore = num => {
+//     score += num
+//     scoreText.innerText = score;
+// }
 
 startGame()
