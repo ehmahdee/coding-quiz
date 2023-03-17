@@ -1,28 +1,42 @@
-let duration = 20;
-var countdown = document.getElementById('time');
+// let duration = 60;
+// var countdown = document.getElementById('time');
 
-let timer = setInterval(() => {
-    countdown.textContent = duration;
-    duration--;
+// let timer = setInterval(() => {
+//     countdown.textContent = duration;
+//     duration--;
   
-    if (duration === 0) {
-      clearInterval(timer);
-      countdown.innerHTML = "Time's up!";
-      localStorage.setItem('mostRecentScore', score);
+//     if (duration === 0) {
+//       clearInterval(timer);
+//       countdown.innerHTML = "Time's up!";
+//       localStorage.setItem('mostRecentScore', score);
 
-      return window.location.assign('./end.html')
-    }
-  }, 1000);
+//       return window.location.assign('./end.html')
+//     }
+//   }, 1000);
 
-var question = document.querySelector('#question')
+// var question = document.querySelector('#question')
+// var choices = Array.from(document.querySelectorAll('.choice-text'));
+
+var question = document.querySelector('#question');
 var choices = Array.from(document.querySelectorAll('.choice-text'));
+var progressText = document.querySelector('#progressText');
+var scoreText = document.querySelector('#score');
+var progressBarFull = document.querySelector('#progressBarFull');
+var timeLeftEl = document.querySelector('#timeLeft');
+var timeLeft = 120;
+timeLeftEl.innerHTML = timeLeft;
 
+var currentQuestion = {};
+var acceptingAnswers = true;
+var score = 0;
+var questionCounter = 0;
+var availableQuestions = {};
 
-var currentQuestion = {}
-var acceptingAnswers = true
-var score = 0
-var questionCounter = 0
-var availableQuestions = []
+// var currentQuestion = {}
+// var acceptingAnswers = true
+// var score = 0
+// var questionCounter = 0
+// var availableQuestions = []
 
 var questions = [
     {
@@ -61,25 +75,41 @@ var questions = [
         choice4: "console.log",
         answer: 4,
     }
-]
+];
 
-var MAX_QUESTIONS = 5
-var SCORE_POINTS = 100
-
-startGame = () => {
-    questionCounter = 0
-    score = 0
-    availableQuestions = [...questions]
-    getNewQuestion()
+function startTimer() {
+    var timer = setInterval(function(){
+        timeLeft = timeLeft-1;
+        timeLeftEl.innerHTML = timeLeft;
+        if (timeLeft === 0) {
+            clearInterval(timer);
+            localStorage.setItem('mostRecentScore', score);
+            return window.location.assign('./end.html');
+        }
+    }, 1000);
 }
 
-getNewQuestion = () => {
+startTimer();
+
+var SCORE_POINTS = 100;
+var MAX_QUESTIONS = 5;
+
+startGame = () => {
+    questionCounter = 0;
+    score = 0;
+    availableQuestions = [...questions];
+    getNewQuestions();
+};
+
+getNewQuestions = () => {
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
-        localStorage.setItem('mostRecentScore', score)
-        return window.location.assign('./end.html')
+        localStorage.setItem('mostRecentScore', score);
+        return window.location.assign('./end.html');
     }
 
-    questionCounter++
+    questionCounter++;
+    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
+    progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
     
     var questionsIndex = Math.floor(Math.random() * availableQuestions.length)
     currentQuestion = availableQuestions[questionsIndex]
@@ -96,33 +126,34 @@ getNewQuestion = () => {
 }
 
 choices.forEach(choice => {
-choice.addEventListener('click', e => {
-    if(!acceptingAnswers) {
-     return 
-}
-    acceptingAnswers = false
-    var selectedChoice = e.target
+    choice.addEventListener('click', e => {
+    if (!acceptingAnswers) return;
+
+    acceptingAnswers = false;
+    var selectedChoice = e.target;
     var selectedAnswer = selectedChoice.dataset['number'];
+    var classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
 
-    let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
-
-    // if(classToApply === 'correct') {
-    //     incrementScore(SCORE_POINTS);
-    // }
-
-    selectedChoice.parentElement.classList.add(classToApply)
+      // Add this conditional to add the "incorrect" class to the parent element of the selected choice
+    if (classToApply === 'correct'){
+        incrementScore(SCORE_POINTS);
+    } else {
+        timeLeft -=10; //subtract 10 seconds from the time left
+        timeLeftEl.innerHTML = timeLeft;
+    }
+    
+    selectedChoice.parentElement.classList.add(classToApply);
 
     setTimeout(() => {
         selectedChoice.parentElement.classList.remove(classToApply)
-        getNewQuestion()
-    }, 1000)
-})
+        getNewQuestions();
+    }, 1000);
+});
+});
 
-})
+incrementScore = num => {
+    score += num
+    scoreText.innerText = score;
+}
 
-// incrementScore = num => {
-//     score += num
-//     scoreText.innerText = score;
-// }
-
-startGame()
+startGame();

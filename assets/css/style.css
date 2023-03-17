@@ -107,6 +107,35 @@ text-align: center;
     background: greenyellow;
 }
 
+#hud {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hud-prefix {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.hud-main-text {
+    text-align: center;
+}
+
+#progressBar {
+    width: 20rem;
+    height: 3rem;
+    border: 0.2rem solid var(--highlight);
+    margin-top: 2rem;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+#progressBarFull {
+    height: 100%;
+    background: var(--highlight);
+    width: 0%;
+}
+
 .btn{
     font-size: 2.4rem;
     padding: 2rem 0;
@@ -164,12 +193,20 @@ text-align: center;
     margin-left: 25%;
 }
 
-.input {
+input {
     display: block;
     padding: 1rem;
     margin-bottom: 1rem;
     margin-left: 6%;
     width: 30vw;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+#saveScoreBtn {
+    border: none;
 }
 
 #highScoresList {
