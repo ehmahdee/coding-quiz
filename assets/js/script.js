@@ -1,17 +1,16 @@
-var startButton
-var quizScreen
-
-let duration = 60;
+let duration = 20;
 var countdown = document.getElementById('time');
 
 let timer = setInterval(() => {
     countdown.textContent = duration;
     duration--;
   
-    // Check if the timer has expired
     if (duration === 0) {
       clearInterval(timer);
       countdown.innerHTML = "Time's up!";
+      localStorage.setItem('mostRecentScore', score);
+
+      return window.location.assign('./end.html')
     }
   }, 1000);
 
@@ -66,6 +65,7 @@ var questions = [
 
 var MAX_QUESTIONS = 5
 var SCORE_POINTS = 100
+
 startGame = () => {
     questionCounter = 0
     score = 0

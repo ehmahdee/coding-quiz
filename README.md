@@ -16,7 +16,7 @@ ADD GIF OF QUIZ FUNCTIONALITY HERE.
 
 ## Credits
 
-Credit to Mike Huang, <a href="https://www.youtube.com/watch?v=f4fB9Xg2JEY&ab_channel=BrianDesign" target="_blank">Brian Design's youtube video</a> and UCLA Fullstack Bootcamp collaborative discord for co-working expertise. 
+Credit to Mike Huang, Mike Rader, Shawn Tschope, <a href="https://www.youtube.com/watch?v=f4fB9Xg2JEY&ab_channel=BrianDesign" target="_blank">Brian Design's youtube video</a> and UCLA Fullstack Bootcamp collaborative discord for co-working expertise. 
 
 ## License
 
