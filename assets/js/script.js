@@ -45,35 +45,35 @@ var questions = [
         choice2: "booleans",
         choice3: "alerts",
         choice4: "numbers",
-        answer: 3,
+        answer: 3
     }, {
         question: "The condition in an if/else statement is enclosed witihin _____",
         choice1: "quotes",
         choice2: "curly brackets",
         choice3: "parentheses",
         choice4: "square brackets",
-        answer: 2,
+        answer: 2
     }, {
         question: "Arrays in JavaScript can be used to store _____",
         choice1: "numbers and strings",
         choice2: "other arrays",
         choice3: "booleans",
         choice4: "all of the above",
-        answer: 4,
+        answer: 4
     }, {
         question: "String values must be enclosed within _____ when being assigned to variables.",
         choice1: "quotes",
         choice2: "curly brackets",
         choice3: "commas",
         choice4: "parentheses",
-        answer: 1,
+        answer: 1
     }, {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
         choice1: "JavaScript",
         choice2: "terminal/bash",
         choice3: "for loops",
         choice4: "console.log",
-        answer: 4,
+        answer: 4
     }
 ];
 
@@ -134,11 +134,10 @@ choices.forEach(choice => {
     var selectedAnswer = selectedChoice.dataset['number'];
     var classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
 
-      // Add this conditional to add the "incorrect" class to the parent element of the selected choice
     if (classToApply === 'correct'){
         incrementScore(SCORE_POINTS);
     } else {
-        timeLeft -=10; //subtract 10 seconds from the time left
+        timeLeft -=10; 
         timeLeftEl.innerHTML = timeLeft;
     }
     
@@ -152,8 +151,8 @@ choices.forEach(choice => {
 });
 
 incrementScore = num => {
-    score += num
-    scoreText.innerText = score;
+    score +=num
+    scoreText.innerText = score
 }
 
 startGame();
